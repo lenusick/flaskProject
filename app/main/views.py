@@ -13,12 +13,13 @@ def index():
     предварительно вызвав метод вставки ролей Role.insert_roles()
     '''
     Role.insert_roles()
-    return render_template("index.html", user = User.query.filter_by(id=current_user.get_id()).first())
+    user = User.query.filter_by(id=current_user.get_id()).first()
+    return render_template("index.html", user=user)
 
 
 @main.route('/500')
 @main.errorhandler(500)
-def internal_server_error(e):
+def internal_server_error():
     return render_template("error500.html"), 500
 
 
@@ -39,7 +40,7 @@ def add_new():
             user = User.query.filter_by(id=current_user.get_id()).first()
             skill = Skill(name=form.name.data,
                           about=form.about.data,
-                          user=user)
+                          user=User.query.get(form.user_id.data))
             db.session.add(skill)
             db.session.commit()
             return redirect('/viewSkills')
@@ -55,4 +56,7 @@ def skills():
     и возвращает HTML-шаблон allSkills.html, отображающий эти навыки
     '''
     user = User.query.filter_by(id=current_user.get_id()).first()
-    return render_template('allSkills.html', skills=user.skills)
+    skills = user.skills
+    if user.role.name == "Administrator":
+        skills = Skill.query.all()
+    return render_template('allSkills.html', skills=skills)

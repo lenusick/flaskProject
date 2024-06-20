@@ -47,7 +47,7 @@ def sign_up():
             db.session.add(user)
             db.session.commit()
             token = user.generate_confirmation_token()
-            # confirm(form.login.data, form.email.data, token.decode('utf-8'))
+            confirm(form.login.data, form.email.data, token.decode('utf-8'))
             return redirect('/')
         return render_template('baseFormTemplate.html', form=form)
     return redirect('/')

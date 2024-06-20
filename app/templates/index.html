@@ -42,13 +42,15 @@
                                 {% endif %}
                             </p>
                             <p><strong>Роль:</strong>
-                                {% if user.role.name == "User" %}
+
+                                {% if user.role.name  == "User" %}
                                     Обычный пользователь
                                 {% elif user.role.name == "Moderator" %}
                                     Модератор
                                 {% else %}
                                     Администратор
                                 {% endif %}
+
                             </p>
                         </div>
                     </div>

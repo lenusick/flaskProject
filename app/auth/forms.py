@@ -18,7 +18,7 @@ class RegistratziyaForm(FlaskForm):
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('Такая почта уже зарегистрирована')
 
-    def validate_name(self, field):
+    def validate_login(self, field):
         if User.query.filter_by(login=field.data).first():
             raise ValidationError('Такое имя уже зарегистрировано')
 
