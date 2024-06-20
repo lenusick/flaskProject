@@ -1,0 +1,17 @@
+{% extends "baseTemplate.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+    <h1 class="text-success text-center">
+        Добавить новый навык
+    </h1>
+    <div class="container mt-5 ">
+        <div class="row justify-content-center">
+            <div class="col-md-6 border border-white">
+                <form id="registrationForm" method="post">
+                    {{ render_form(form) }}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

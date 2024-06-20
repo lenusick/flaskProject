@@ -1,0 +1,63 @@
+{% extends "baseTemplate.html" %}
+
+{% block content %}
+    {% if current_user.is_authenticated %}
+        <head>
+            <meta charset="UTF-8">
+            <title>Личные данные</title>
+            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+            <style>
+                body {
+                    background-color: #f0f9f4;
+                }
+
+                .card {
+                    font-size: 18px;
+                    background-color: #ddf5f1;
+                    border-color: #48c7b4;
+                }
+
+                .card-header {
+                    background-color: #48c7b4;
+                    color: white;
+                }
+            </style>
+        </head>
+        <body>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card shadow-lg">
+                        <div class="card-header">
+                            <h2 class="text-center">Личные данные</h2>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Логин:</strong> {{ user.login }}</p>
+                            <p><strong>Почта:</strong> {{ user.email }}</p>
+                            <p><strong>Пол:</strong>
+                                {% if user.sex == "m" %}
+                                    Мужчина
+                                {% else %}
+                                    Женщина
+                                {% endif %}
+                            </p>
+                            <p><strong>Роль:</strong>
+                                {% if user.role.name == "User" %}
+                                    Обычный пользователь
+                                {% elif user.role.name == "Moderator" %}
+                                    Модератор
+                                {% else %}
+                                    Администратор
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+    {% else %}
+        <h1>Привет, мы ещё не знакомы...</h1>
+    {% endif %}
+{% endblock %}

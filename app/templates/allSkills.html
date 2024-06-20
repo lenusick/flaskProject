@@ -1,0 +1,20 @@
+{% extends "baseTemplate.html" %}
+
+{% block content %}
+    <table class="table table-bordered" style="width:100%">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Описание</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for skill in skills %}
+            <tr>
+                <td>{{ skill.name }}</td>
+                <td>{{ skill.about }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
